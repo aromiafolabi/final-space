@@ -6,23 +6,14 @@ function Nav () {
     <nav className="navbar is-dark">
       <div className="container">
         <div className="navbar-brand">
-        <Link to ="/" className="navbar-item">
+          <Link to ="/" className="navbar-item">
             Home
-          </Link>
-        </div>
-      </div>
-      <div className="container">
-        <div className="navbar-brand">
-         
+          </Link>      
           <Link to ="/character" className="navbar-item">
             Characters
-          </Link>
-        
+          </Link>        
           <Link to ="/episode" className="navbar-item">
             Episodes
-          </Link>
-          <Link to="/quote" className="navbar-item">
-            Quote Game
           </Link>
         </div>
       </div>

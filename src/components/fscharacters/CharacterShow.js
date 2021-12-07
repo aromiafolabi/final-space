@@ -1,30 +1,40 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import { getSingleCharacter } from '../lib/api'
+import { getAllQuotes, getSingleCharacter } from '../lib/api'
+import { createNotification } from '../lib/notification'
 
 function CharacterShow () {
+  
   const { characterId } = useParams()
   const [character, setCharacter] = React.useState(null)
   React.useEffect(() => {
     const getData = async () => {
       try {
-        const response = await getSingleCharacter(characterId)
-        console.log(response.data)
-        setCharacter(response.data)
+        const characterResponse = await getSingleCharacter(characterId)
+        setCharacter(characterResponse.data)
+        const quoteResponse = await getAllQuotes()
+        const quotesArray = quoteResponse.data.filter(quote => {
+          if (quote.by === characterResponse.data.name){
+            return quote
+          }
+          
+        })
+        createNotification(quotesArray[Math.floor(Math.random() * quotesArray.length)].quote)
       } catch (err) {
         console.log(err)
       }
     }
     getData()
   }, [characterId])
+  
+
+
   return (
-    <section>
+    <section className="section">
       <div className="container">
         {character ? (
           <div>
-            <h2 className="title has-text-centered">
-              {character.name}
-            </h2>
+            <h2 className="title has-text-centered"> {character.name} </h2>
             <hr />
             <div className="columns">
               <div className="column is-half"> 
@@ -34,49 +44,41 @@ function CharacterShow () {
               </div>
               <div className="column is-half">
                 <h4 className="title is-4">
-                  <span role="img" aria-label="plate">
-                    🍽
+                  <span role="img" aria-label="globe">
+                  🌍
                     
                   </span> {' '}
-                  Planet
+                  Origin
                 </h4>
                 <p>{character.origin}</p>
                 <hr />
                 <h4 className="title is-4">
-                  <span role="img" aria-label="globe">
-                      🌍
+                  <span role="img" aria-label="alien">
+                    👽
                   </span> {' '}
                     Species
                 </h4>
                 <p>{character.species}</p>
-              </div>
-              <div className="column is-half">
+                <hr />              
                 <h4 className="title is-4">
-                  <span role="img" aria-label="plate">
-                    🍽
-                    
+                  <span role="img" aria-label="lightning">
+                    ⚡️                    
                   </span> {' '}
-                  Alias
+                  Abilities
                 </h4>
-            
+                <p>{character.abilities[Math.floor(Math.random() * character.abilities.length)]}</p>                
+                <hr />               
+                <h4 className="title is-4">
+                  <span role="img" aria-label="globe">
+                      @
+                  </span> {' '}
+                    Alias
+                </h4>
                 <p>{character.alias[Math.floor(Math.random() * character.alias.length)]}</p>
-                
-                
-                <hr />
-                <div className="column is-half">
-                  <h4 className="title is-4">
-                    <span role="img" aria-label="globe">
-                      🌍
-                    </span> {' '}
-                    Abilities
-                  </h4>
-                  <p>{character.abilities[Math.floor(Math.random() * character.abilities.length)]}</p>
-                  <p>{character.status}</p>
-                </div>
               </div>
             </div>
-          </div>
-          
+            <hr />            
+          </div>                                    
         ) : (
           <p>...loading</p>
         )

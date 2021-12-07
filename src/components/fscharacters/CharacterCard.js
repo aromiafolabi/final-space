@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function CharacterCard({ characterId, name, image, origin, gender }) {
+function CharacterCard({ characterId, name, image, origin }) {
   return (
-    <div className="column is one-quarter-desktop is one-third-tablet">
+    <div className="column is-one-quarter-desktop is-one-third-tablet">
       <Link to={`/character/${characterId}`}>
-        <div className="card">
-          <div className="card-header">
-            <h3 className="card-header-title">{name}</h3>
+        <div className="card is-dark">
+          <div className="card-header is-dark">
+            <h3 className="card-header-title is-dark">{name}</h3>
           </div>
         </div>
         <div className="card-image">
@@ -16,8 +16,7 @@ function CharacterCard({ characterId, name, image, origin, gender }) {
           </figure>
         </div>
         <div className="card-content">
-          <h5>Character Origin: {origin}</h5>
-          <h5>Character Gender: {gender}</h5>
+          <h4 className="card-header-title">{origin}</h4>
         </div>
         
       </Link>

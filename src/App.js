@@ -4,11 +4,12 @@ import Home from './components/common/Home'
 import CharacterIndex from './components/fscharacters/CharacterIndex'
 import CharacterShow from './components/fscharacters/CharacterShow'
 import EpisodeIndex from './components/fsepisodes/EpisodeIndex'
-import QuoteIndex from './components/fsquotes/QuotesIndex'
+import Notification from 'react-notify-toast'
 
 function App() {
   return (
     <BrowserRouter>
+      <Notification />
       <Nav />
       <Switch>
         <Route exact path="/">
@@ -22,10 +23,7 @@ function App() {
         </Route>
         <Route path="/episode">
           <EpisodeIndex />
-        </Route>
-        <Route path="/quote">
-          <QuoteIndex />
-        </Route>
+        </Route>       
       </Switch>
     </BrowserRouter>
   )

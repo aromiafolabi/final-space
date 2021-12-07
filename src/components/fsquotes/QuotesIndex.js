@@ -13,6 +13,7 @@ function QuoteIndex () {
     }
     getData()
   }, [])
+    
   return (
     <section className="section">
       <div className="container">
@@ -25,13 +26,7 @@ function QuoteIndex () {
                 character={quote.character}
                 image={quote.image}
                 quote={quote.quote}
-                quoteId={quote.id}
-                // director={episode.director}
-                // origin={character.origin}
-                // characterId={character.id}
-                // alias={character.alias}
-                // abilities={character.abilities}
-                // status={character.status}
+                quoteId={quote.id}               
             
         
               />
@@ -45,5 +40,6 @@ function QuoteIndex () {
     </section>
   )
 }
+
 
 export default QuoteIndex

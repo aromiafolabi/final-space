@@ -4,32 +4,50 @@ import EpisodeCard from './EpisodeCard'
 
 function EpisodeIndex () {
   const [episodes, setEpisodes] = React.useState(null)
+  const [selectedSeason, setSelectedSeason] = React.useState('all')
+  
   React.useEffect(() => {
     const getData = async () => {
       const response = await getAllEpisodes()
-      console.log(response.data)
       setEpisodes(response.data)
       
     }
     getData()
   }, [])
+  
+  const handleSelect = (e) => {
+    setSelectedSeason(e.target.value)
+  }
+
+  const filteredEpisodes = (episodes) => {
+    return episodes.filter(episode => {
+      return episode.air_date.includes(selectedSeason) || selectedSeason === 'all'
+    })
+  }
+
+  
   return (
     <section className="section">
       <div className="container">
+        <div className="field select is-medium">
+          <select onChange={handleSelect}>
+            <option value="all">All Seasons</option>
+            <option value="2018">Season One</option>
+            <option value="2019">Season Two</option>
+          </select>
+        </div>
         <div className ="column is-multiline">
           {episodes ? (
-            episodes.map(episode => (
+            filteredEpisodes(episodes).map(episode => (
               <EpisodeCard 
                 key={episode.id}
                 name={episode.name}
                 image={episode.img_url}
                 writer={episode.writer}
                 director={episode.director}
-                // origin={character.origin}
-                // characterId={character.id}
-                // alias={character.alias}
-                // abilities={character.abilities}
-                // status={character.status}
+                date={episode.air_date}  
+                episodeId={episode.id} 
+                           
             
         
               />
