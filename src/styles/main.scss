@@ -16,11 +16,67 @@ input.field-input-is-normal {
 border: 30px solid $is-dark;
 }
 
+.home-navbar {
+  background-color: rgba(127, 133, 141, 1);
+  
+}
+a.navbar-item {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  visited {
+    color: white;
+  }
+
+
+}
+
+h1.title {
+  font-size: 100px;
+}
+
 .background {
   background-image: url('https://i.pinimg.com/originals/bf/fe/de/bffede1d81ebe6ddb2eb3033dc86ac68.gif');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
+.character-name {
+  background-color: none;
+  padding: 20px 0px 0px 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: black;
 
+}
+.card-header-title {
+  background-color: rgba(127, 133, 141, 1);
+}
+.card-content {
+  background-color: rgba(127, 133, 141, 1);
+  padding: 0px 0px 0px 0px;
+}
+.character-card {
+  background-color: rgba(127, 133, 141, 1);
+  padding: 20px;
+}
+h2.title {
+  color: black;
+  text-align: center;
+}
+.whole-card {
+  border: solid rgba(127, 133, 141, 1) 3px;
+  border-radius: 10px;
+  padding: 0px 0px 0px 0px;
+  
+}
+hr {
+  border: solid 2px;
+}
+.episode-writer{
+  color: white;
+}
+.episode-director{
+  color:white;
+}
 @import '~bulma/bulma.sass';

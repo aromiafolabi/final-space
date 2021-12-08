@@ -1,16 +1,23 @@
 import React from 'react'
-import { getAllEpisodes } from '../lib/api'
+import { getAllEpisodes } from '../../lib/api'
 import EpisodeCard from './EpisodeCard'
+import Error from '../common/Error'
+import Loading from '../common/Loading'
 
 function EpisodeIndex () {
   const [episodes, setEpisodes] = React.useState(null)
   const [selectedSeason, setSelectedSeason] = React.useState('all')
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !episodes && !isError
   
   React.useEffect(() => {
     const getData = async () => {
-      const response = await getAllEpisodes()
-      setEpisodes(response.data)
-      
+      try {
+        const response = await getAllEpisodes()
+        setEpisodes(response.data)
+      } catch (err) {
+        setIsError(true)
+      }
     }
     getData()
   }, [])
@@ -28,6 +35,7 @@ function EpisodeIndex () {
   
   return (
     <section className="section">
+      <h1 className="watch-episode title is-1 has-text-centered">Watch an episode!</h1>
       <div className="container">
         <div className="field select is-medium">
           <select onChange={handleSelect}>
@@ -37,7 +45,9 @@ function EpisodeIndex () {
           </select>
         </div>
         <div className ="column is-multiline">
-          {episodes ? (
+          {isError && <Error />}
+          {isLoading && <Loading />}
+          {episodes && 
             filteredEpisodes(episodes).map(episode => (
               <EpisodeCard 
                 key={episode.id}
@@ -46,17 +56,10 @@ function EpisodeIndex () {
                 writer={episode.writer}
                 director={episode.director}
                 date={episode.air_date}  
-                episodeId={episode.id} 
-                           
-            
-        
+                episodeId={episode.id}                                    
               />
-            ))
-          ) : (
-            <p>...loading</p>
-          )}
+            ))}
         </div>
-
       </div>
     </section>
   )
